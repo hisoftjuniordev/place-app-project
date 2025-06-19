@@ -1,0 +1,130 @@
+
+
+<div class="container">
+  <div class="column">
+    <h2>Upravljanje s podjetji</h2>
+
+    <form [formGroup]="podjetjeForm" (ngSubmit)="onPodjetjeSubmit()">
+      <fieldset>
+        <legend>Dodaj novo podjetje</legend>
+        <div>
+          <label for="podjetje-naziv">Naziv:</label>
+          <input id="podjetje-naziv" type="text" formControlName="naziv">
+          <div *ngIf="podjetjeForm.get('naziv')?.invalid && podjetjeForm.get('naziv')?.touched" class="text-danger">
+            Naziv je obvezen podatek.
+          </div>
+        </div>
+        <div>
+          <label for="podjetje-davcna">Davčna številka:</label>
+          <input id="podjetje-davcna" type="text" formControlName="davcnaStevilka" placeholder="Npr. 12345678">
+          <div *ngIf="podjetjeForm.get('davcnaStevilka')?.invalid && podjetjeForm.get('davcnaStevilka')?.touched" class="text-danger">
+            <span *ngIf="podjetjeForm.get('davcnaStevilka')?.errors?.['required']">Polje je obvezno.</span>
+            <span *ngIf="podjetjeForm.get('davcnaStevilka')?.errors?.['pattern']">Davčna številka mora vsebovati točno 8 številk.</span>
+          </div>
+        </div>
+        <div>
+          <label for="podjetje-maticna">Matična številka:</label>
+          <input id="podjetje-maticna" type="text" formControlName="maticnaStevilka">
+           <div *ngIf="podjetjeForm.get('maticnaStevilka')?.invalid && podjetjeForm.get('maticnaStevilka')?.touched" class="text-danger">
+            Matična številka je obvezen podatek.
+          </div>
+        </div>
+        <div>
+          <label for="podjetje-naslov">Naslov:</label>
+          <input id="podjetje-naslov" type="text" formControlName="naslov">
+           <div *ngIf="podjetjeForm.get('naslov')?.invalid && podjetjeForm.get('naslov')?.touched" class="text-danger">
+            Naslov je obvezen podatek.
+          </div>
+        </div>
+        <br>
+        <button type="submit" [disabled]="!podjetjeForm.valid">Shrani podjetje</button>
+      </fieldset>
+    </form>
+    
+    <hr>
+
+    <h3>Seznam podjetij</h3>
+    <table *ngIf="podjetja.length > 0">
+      <thead>
+        <tr><th>ID</th><th>Naziv</th><th>Davčna št.</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of podjetja"><td>{{ p.id }}</td><td>{{ p.naziv }}</td><td>{{ p.davcnaStevilka }}</td></tr>
+      </tbody>
+    </table>
+    <p *ngIf="podjetja.length === 0">Trenutno ni nobenega podjetja v bazi.</p>
+  </div>
+
+  <div class="column">
+    <h2>Upravljanje z zaposlenimi</h2>
+
+    <form [formGroup]="zaposlenForm" (ngSubmit)="onZaposlenSubmit()">
+      <fieldset>
+        <legend>Dodaj novega zaposlenega</legend>
+        <div>
+          <label for="podjetjeID">Izberi podjetje:</label>
+          <select id="podjetjeID" formControlName="podjetjeID">
+            <option [ngValue]="null" disabled>-- Prosim, izberite --</option>
+            <option *ngFor="let p of podjetja" [ngValue]="p.id">{{ p.naziv }}</option>
+          </select>
+          <div *ngIf="zaposlenForm.get('podjetjeID')?.invalid && zaposlenForm.get('podjetjeID')?.touched" class="text-danger">
+            Izbira podjetja je obvezna.
+          </div>
+        </div>
+        <div>
+            <label for="ime">Ime:</label><input id="ime" type="text" formControlName="ime">
+            <div *ngIf="zaposlenForm.get('ime')?.invalid && zaposlenForm.get('ime')?.touched" class="text-danger">Ime je obvezno.</div>
+        </div>
+        <div>
+            <label for="priimek">Priimek:</label><input id="priimek" type="text" formControlName="priimek">
+            <div *ngIf="zaposlenForm.get('priimek')?.invalid && zaposlenForm.get('priimek')?.touched" class="text-danger">Priimek je obvezen.</div>
+        </div>
+        <div>
+            <label for="emso">EMŠO:</label><input id="emso" type="text" formControlName="emso" placeholder="Vnesite 13 številk">
+            <div *ngIf="zaposlenForm.get('emso')?.invalid && zaposlenForm.get('emso')?.touched" class="text-danger">
+                <span *ngIf="zaposlenForm.get('emso')?.errors?.['required']">EMŠO je obvezen.</span>
+                <span *ngIf="zaposlenForm.get('emso')?.errors?.['pattern']">EMŠO mora vsebovati točno 13 številk.</span>
+            </div>
+        </div>
+        <div>
+            <label for="davcna">Davčna številka:</label><input id="davcna" type="text" formControlName="davcnaStevilka" placeholder="Vnesite 8 številk">
+            <div *ngIf="zaposlenForm.get('davcnaStevilka')?.invalid && zaposlenForm.get('davcnaStevilka')?.touched" class="text-danger">
+                <span *ngIf="zaposlenForm.get('davcnaStevilka')?.errors?.['required']">Davčna številka je obvezna.</span>
+                <span *ngIf="zaposlenForm.get('davcnaStevilka')?.errors?.['pattern']">Vnesti morate točno 8 številk.</span>
+            </div>
+        </div>
+        <div><label for="naslov">Naslov:</label><input id="naslov" type="text" formControlName="naslov"></div>
+        <div>
+            <label for="trr">TRR:</label><input id="trr" type="text" formControlName="trr">
+            <div *ngIf="zaposlenForm.get('trr')?.invalid && zaposlenForm.get('trr')?.touched" class="text-danger">TRR je obvezen.</div>
+        </div>
+        <div>
+            <label for="datumZaposlitve">Datum zaposlitve:</label><input id="datumZaposlitve" type="date" formControlName="datumZaposlitve">
+            <div *ngIf="zaposlenForm.get('datumZaposlitve')?.invalid && zaposlenForm.get('datumZaposlitve')?.touched" class="text-danger">Datum zaposlitve je obvezen.</div>
+        </div>
+        
+        <br>
+        <button type="submit" [disabled]="!zaposlenForm.valid">Shrani zaposlenega</button>
+      </fieldset>
+    </form>
+
+    <hr>
+    
+    <h3>Seznam zaposlenih</h3>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Ime</th><th>Priimek</th><th>Podjetje</th><th>Datum Zaposlitve</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let z of zaposleni">
+            <td>{{ z.id }}</td>
+            <td>{{ z.ime }}</td>
+            <td>{{ z.priimek }}</td>
+            <td>{{ z.podjetje?.naziv }}</td>
+            <td>{{ z.datumZaposlitve | date:'d. M.yyyy' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="zaposleni.length === 0">Trenutno ni nobenega zaposlenega v bazi.</p>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+# General
+.DS_Store
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# .NET / Visual Studio
+*.vs/
+[Bb]in/
+[Oo]bj/
+appsettings.Development.json
+Properties/launchSettings.json
+
+# Angular
+/PlaceApp-Frontend/node_modules/
+/PlaceApp-Frontend/dist/
+/PlaceApp-Frontend/.angular/
+/PlaceApp-Frontend/coverage/
+/PlaceApp-Frontend/npm-debug.log*
+/PlaceApp-Frontend/e2e/
+/PlaceApp-Frontend/browserslist
+
+# Environment files
+/PlaceApp-Frontend/src/environments/environment.ts
+/PlaceApp-Frontend/src/environments/environment.*.ts
+!/PlaceApp-Frontend/src/environments/environment.prod.ts
+!/PlaceApp-Frontend/src/environments/environment.template.ts
