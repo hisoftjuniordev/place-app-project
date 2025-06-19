@@ -1,0 +1,103 @@
+/* Datoteka: src/app/pages/izracun-place/izracun-place.component.css */
+:host { 
+    display: block; 
+    padding: 1rem; 
+    background-color: #f8f9fa; 
+}
+.container { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 2rem; 
+}
+.form-column { 
+    flex: 1; 
+    min-width: 350px; 
+}
+.results-column { 
+    flex: 1; 
+    min-width: 350px; 
+    background: #fff; 
+    padding: 1.5rem; 
+    border-radius: 8px; 
+    border: 1px solid #dee2e6;
+}
+h1, h2 { 
+    color: #343a40; 
+    border-bottom: 2px solid #dee2e6; 
+    padding-bottom: 0.5rem; 
+    margin-top: 0;
+}
+hr {
+    margin: 2rem 0;
+}
+fieldset { 
+    border: 1px solid #ced4da; 
+    border-radius: 8px; 
+    padding: 1rem 1.5rem 1.5rem 1.5rem; 
+    margin-bottom: 1.5rem; 
+    background-color: #ffffff; 
+}
+legend { 
+    font-weight: bold; 
+    padding: 0 0.5rem; 
+    color: #495057; 
+}
+label { 
+    display: block; 
+    width: 100%; 
+    margin-bottom: 0.3rem; 
+    font-size: 0.9rem; 
+    font-weight: 500; 
+    color: #495057; 
+    margin-top: 1rem; 
+}
+input[type="number"], input[type="month"] { 
+    display: block; 
+    width: 100%; 
+    box-sizing: border-box; 
+    padding: 0.6rem; 
+    font-size: 1rem; 
+    border: 1px solid #ced4da; 
+    border-radius: 4px; 
+}
+.calculate-button { 
+    display: block; 
+    width: 100%; 
+    padding: 0.8rem; 
+    font-size: 1.25rem; 
+    font-weight: bold; 
+    color: #fff; 
+    background-color: #007bff; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    margin-top: 1.5rem; 
+}
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+td { 
+    padding: 0.75rem; 
+    text-align: left; 
+    border-bottom: 1px solid #dee2e6; 
+}
+td:last-child { 
+    text-align: right; 
+    font-weight: bold; 
+}
+.section-title td { 
+    font-weight: bold; 
+    background-color: #f8f9fa; 
+    color: #343a40; 
+    text-align: left;
+}
+.summary-row td { 
+    font-weight: bold; 
+}
+.total-row td { 
+    font-size: 1.2rem; 
+    font-weight: bold; 
+    color: #007bff; 
+    background-color: #e9ecef; 
+}

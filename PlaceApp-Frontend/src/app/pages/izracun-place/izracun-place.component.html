@@ -1,0 +1,66 @@
+<h1>Izračun plače za zaposlenega z ID: {{zaposlenId}}</h1>
+<p>Na tej strani lahko vnesete podatke za obračun plače, izračunate zneske in jih shranite v bazo.</p>
+<hr>
+
+<div class="container">
+  <div class="form-column">
+    <form [formGroup]="placaForm" (ngSubmit)="izracunajInShrani()">
+      
+      <fieldset>
+        <legend>Obdobje in Bruto</legend>
+        <div>
+            <label for="obdobje">Obdobje (leto-mesec):</label>
+            <input id="obdobje" type="month" formControlName="obdobje">
+        </div>
+        <div>
+            <label for="bruto_placa_vnos">1. Vnesi fiksni bruto (če želite preglasiti izračun):</label>
+            <input type="number" id="bruto_placa_vnos" formControlName="brutoPlacaVnos">
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>2. Ali izračunaj bruto iz postavk:</legend>
+        <label>Urna postavka (€): <input type="number" formControlName="urnaPostavka"></label>
+        <label>Redno delo (ure): <input type="number" formControlName="rednoDeloUre"></label>
+        <label>Plačani prazniki (ure): <input type="number" formControlName="placaniPraznikiUre"></label>
+        <label>Poračun (€): <input type="number" formControlName="poracun"></label>
+        <label>Stimulacija (€): <input type="number" formControlName="stimulacija"></label>
+        <label>Dodatek za delovno dobo (%): <input type="number" formControlName="delovnaDobaProcent"></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Olajšave in Odtegljaji</legend>
+        <label>Posebne in osebne olajšave (€): <input type="number" formControlName="posebneOlajsave"></label>
+        <label>Odtegljaji (npr. sindikat, kredit): <input type="number" formControlName="odtegljaji"></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Povračila Stroškov</legend>
+        <label>Prehrana (št. dni): <input type="number" formControlName="prehranaDni"></label>
+        <label>Znesek prehrane na dan (€): <input type="number" formControlName="prehranaZnesek"></label>
+        <label>Prevoz na delo (km v eno smer): <input type="number" formControlName="prevozKm"></label>
+        <label>Cena na km (€): <input type="number" formControlName="kmCena"></label>
+        <label>Dodatna kilometrina/terenski dodatek (€): <input type="number" formControlName="kilometrineFiksno"></label>
+      </fieldset>
+      
+      <button type="submit" [disabled]="!placaForm.valid" class="calculate-button">Izračunaj in Shrani</button>
+    </form>
+  </div>
+  
+  <div class="results-column" *ngIf="rezultat">
+    <h2>Rezultati izračuna</h2>
+    <table>
+      <tr class="section-title"><td colspan="2">Glavni zneski</td></tr>
+      <tr class="summary-row"><td>Bruto Plača</td><td>{{ rezultat.brutoPlaca | number:'1.2-2' }} €</td></tr>
+      <tr class="summary-row"><td>Neto Plača</td><td>{{ rezultat.netoPlaca | number:'1.2-2' }} €</td></tr>
+      <tr class="total-row"><td>SKUPAJ ZA IZPLAČILO</td><td>{{ rezultat.zaIzplacilo | number:'1.2-2' }} €</td></tr>
+      <tr class="total-row"><td>CELOTEN STROŠEK DELODAJALCA</td><td>{{ rezultat.celotenStrosekDelodajalca | number:'1.2-2' }} €</td></tr>
+      
+      <tr class="section-title"><td colspan="2">Podrobnosti Izračuna</td></tr>
+      <tr><td>Prispevki delojemalca (iz bruto)</td><td>- {{ rezultat.skupajPrispevkiIzBruto | number:'1.2-2' }} €</td></tr>
+      <tr><td>Akontacija dohodnine</td><td>- {{ rezultat.dohodnina | number:'1.2-2' }} €</td></tr>
+      <tr><td>Povračilo materialnih stroškov</td><td>+ {{ rezultat.skupajMaterialniStroski | number:'1.2-2' }} €</td></tr>
+      <tr><td>Odtegljaji</td><td>- {{ rezultat.odtegljaji | number:'1.2-2' }} €</td></tr>
+    </table>
+  </div>
+</div>
