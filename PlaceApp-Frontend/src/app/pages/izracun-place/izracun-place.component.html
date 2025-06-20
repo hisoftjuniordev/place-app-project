@@ -62,5 +62,9 @@
       <tr><td>Povračilo materialnih stroškov</td><td>+ {{ rezultat.skupajMaterialniStroski | number:'1.2-2' }} €</td></tr>
       <tr><td>Odtegljaji</td><td>- {{ rezultat.odtegljaji | number:'1.2-2' }} €</td></tr>
     </table>
+
+    <a *ngIf="rezultat.id" [routerLink]="['/placilna-lista', rezultat.id]" target="_blank" class="payslip-button">
+    Prikaži plačilno listo v novem zavihku
+  </a>
   </div>
 </div>

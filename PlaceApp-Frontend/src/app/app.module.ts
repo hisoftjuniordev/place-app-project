@@ -10,6 +10,9 @@ import { AppComponent } from './app.component';
 // Uvoz vaših standalone komponent
 import { ZaposleniListComponent } from './pages/zaposleni-list/zaposleni-list.component';
 import { IzracunPlaceComponent } from './pages/izracun-place/izracun-place.component';
+import { NastavitveComponent } from './pages/nastavitve/nastavitve.component';
+import { EvidencaDelaComponent } from './pages/evidenca-dela/evidenca-dela.component';
+import { PlacilnaListaComponent } from './pages/placilna-lista/placilna-lista.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { IzracunPlaceComponent } from './pages/izracun-place/izracun-place.compo
     AppRoutingModule,
     HttpClientModule,       // <<< PREVERITE, DA JE TA VRSTICA TUKAJ
     ZaposleniListComponent,   // Standalone komponente se uvažajo
-    IzracunPlaceComponent     // Standalone komponente se uvažajo
+    IzracunPlaceComponent,
+    EvidencaDelaComponent,
+    NastavitveComponent,
+    PlacilnaListaComponent     // Standalone komponente se uvažajo
   ],
   providers: [],
   bootstrap: [AppComponent]

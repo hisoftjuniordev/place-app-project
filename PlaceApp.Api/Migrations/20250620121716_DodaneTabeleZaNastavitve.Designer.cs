@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlaceApp.Api.Data;
 
@@ -11,9 +12,11 @@ using PlaceApp.Api.Data;
 namespace PlaceApp.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250620121716_DodaneTabeleZaNastavitve")]
+    partial class DodaneTabeleZaNastavitve
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,49 +48,6 @@ namespace PlaceApp.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DohodninskeLestvice");
-                });
-
-            modelBuilder.Entity("PlaceApp.Api.Models.EvidencaUra", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BolniskaUre")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Datum")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DopustUre")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Nadure")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Opomba")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PraznikUre")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RedneUre")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ZaposlenId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ZaposlenId");
-
-                    b.ToTable("EvidenceUr");
                 });
 
             modelBuilder.Entity("PlaceApp.Api.Models.NastavitveObracuna", b =>
@@ -448,17 +408,6 @@ namespace PlaceApp.Api.Migrations
                     b.HasIndex("PodjetjeID");
 
                     b.ToTable("Zaposleni");
-                });
-
-            modelBuilder.Entity("PlaceApp.Api.Models.EvidencaUra", b =>
-                {
-                    b.HasOne("PlaceApp.Api.Models.Zaposlen", "Zaposlen")
-                        .WithMany()
-                        .HasForeignKey("ZaposlenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Zaposlen");
                 });
 
             modelBuilder.Entity("PlaceApp.Api.Models.Obracun", b =>

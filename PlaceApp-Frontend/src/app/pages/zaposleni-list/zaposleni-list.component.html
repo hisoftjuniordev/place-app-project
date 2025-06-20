@@ -152,7 +152,10 @@
             <td>{{ z.priimek }}</td>
             <td>{{ z.podjetje?.naziv }}</td>
             <td>{{ z.datumZaposlitve | date:'d. M.yyyy' }}</td>
-            <td><a [routerLink]="['/izracun-place', z.id]">Izračun plače</a></td>
+            <td><a [routerLink]="['/izracun-place', z.id]">Izračun plače</a>
+            <span style="margin: 0 5px;">|</span> 
+          <a [routerLink]="['/evidenca-dela', z.id]">Evidenca ur</a>
+          </td>
           </tr>
         </tbody>
       </table>

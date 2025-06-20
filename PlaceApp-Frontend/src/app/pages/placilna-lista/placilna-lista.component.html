@@ -1,0 +1,27 @@
+<div class="toolbar">
+    <button (click)="generirajPDF()">Shrani kot PDF</button>
+</div>
+
+<div id="placinaListaContent" *ngIf="placa">
+    <h1>Plačilna Lista</h1>
+    <div class="header-info">
+        <div><strong>Obdobje:</strong> {{ placa.obdobje | date:'MMMM yyyy' }}</div>
+        <div><strong>Zaposleni:</strong> IME IN PRIIMEK (ID: {{placa.zaposlenId}})</div>
+        <div><strong>Podjetje:</strong> NAZIV PODJETJA</div>
+    </div>
+
+    <table>
+        <tr class="section-title"><td colspan="2">Bruto Sestavine</td></tr>
+        <tr><td>Urna postavka</td><td>{{ placa.urnaPostavka | number:'1.4-4' }} €</td></tr>
+        <tr><td>Redno delo ({{placa.rednoDeloUre}} ur)</td><td>... €</td></tr>
+        <tr class="summary-row"><td>Skupaj BRUTO</td><td>{{ placa.brutoPlaca | number:'1.2-2' }} €</td></tr>
+
+        <tr class="section-title"><td colspan="2">Prispevki in Dohodnina</td></tr>
+        <tr class="summary-row"><td>Dohodnina</td><td>- {{ placa.dohodnina | number:'1.2-2' }} €</td></tr>
+
+        <tr class="total-row"><td>NETO PLAČA</td><td>{{ placa.netoPlaca | number:'1.2-2' }} €</td></tr>
+
+        <tr class="section-title"><td colspan="2">Dodatki in odtegljaji</td></tr>
+        <tr class="total-row"><td>ZA IZPLAČILO</td><td>{{ placa.zaIzplacilo | number:'1.2-2' }} €</td></tr>
+    </table>
+</div>

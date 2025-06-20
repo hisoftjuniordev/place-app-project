@@ -18,8 +18,11 @@ namespace PlaceApp.Api.Data
         public DbSet<Pogodba> Pogodbe { get; set; }
         public DbSet<PostavkaPlacilneListe> PostavkePlacilneListe { get; set; }
 
-
+        public DbSet<NastavitveObracuna> NastavitveObracuna { get; set; }
+        public DbSet<DohodninskaLestvica> DohodninskeLestvice { get; set; }
         // --- DODAJTE TO METODO ZA KONFIGURACIJO MODELA ---
+
+        public DbSet<EvidencaUra> EvidenceUr { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

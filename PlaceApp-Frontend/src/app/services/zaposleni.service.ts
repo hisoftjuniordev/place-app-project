@@ -54,7 +54,37 @@ export interface Placa {
     zaIzplacilo: number;
     celotenStrosekDelodajalca: number;
 }
+// === DODAJTE NOVA VMESNIKA ===
+export interface NastavitveObracuna {
+  id: number;
+  veljavnoOd: string;
+  minimalnaPlaca: number;
+  cenaPrehrane: number;
+  cenaPrevozaKm: number;
+}
 
+export interface DohodninskaLestvica {
+  id: number;
+  zaporednaSt: number;
+  mejaDo: number;
+  stopnja: number;
+  absolutniZnesek: number;
+}
+// =============================
+// === DODAJTE NOV VMESNIK ===
+export interface EvidencaUra {
+  id: number;
+  zaposlenId: number;
+  datum: string;
+  redneUre: number;
+  nadure: number;
+  praznikUre: number;
+  dopustUre: number;
+  bolniskaUre: number;
+  status: string;
+  opomba?: string;
+}
+// =============================
 
 // DTO (Data Transfer Objects)
 export type NovoPodjetjeDTO = Omit<Podjetje, 'id'>;
@@ -70,6 +100,8 @@ export class ZaposleniService {
   private apiUrlZaposleni = 'https://localhost:7162/api/Zaposleni';
   private apiUrlPodjetje = 'https://localhost:7162/api/Podjetje';
   private apiUrlPlaca = 'https://localhost:7162/api/Placa';
+  private apiUrlNastavitve = 'https://localhost:7162/api/Nastavitve';
+private apiUrlEvidencaUr = 'https://localhost:7162/api/EvidencaUr'; // <<< DODAJTE
 
   constructor(private http: HttpClient) { }
 
@@ -80,6 +112,20 @@ export class ZaposleniService {
   
   addZaposlen(zaposlen: NovZaposlenDTO): Observable<Zaposlen> {
     return this.http.post<Zaposlen>(this.apiUrlZaposleni, zaposlen);
+  }
+
+  getNastavitve(): Observable<any> {
+    return this.http.get<any>(this.apiUrlNastavitve);
+  }
+
+ 
+  updateNastavitve(nastavitve: Omit<NastavitveObracuna, 'id'>): Observable<any> {
+    return this.http.post(this.apiUrlNastavitve, nastavitve);
+  }
+
+  
+  updateLestvica(lestvica: Omit<DohodninskaLestvica, 'id'>[]): Observable<any> {
+    return this.http.post(`${this.apiUrlNastavitve}/lestvica`, lestvica);
   }
 
   // --- Metode za Podjetja ---
@@ -98,5 +144,20 @@ export class ZaposleniService {
 
   addPlaca(placa: NovaPlacaDTO): Observable<Placa> {
     return this.http.post<Placa>(this.apiUrlPlaca, placa);
+  }
+    // === NOVE METODE ZA EVIDENCO UR ===
+  
+  // Pridobi vse vnose za zaposlenega za določen mesec in leto
+  getEvidencaZaMesec(zaposlenId: number, leto: number, mesec: number): Observable<EvidencaUra[]> {
+    return this.http.get<EvidencaUra[]>(`${this.apiUrlEvidencaUr}/${zaposlenId}/${leto}/${mesec}`);
+  }
+
+  // Shrani seznam vnosov za evidenco ur
+  saveEvidencaUr(vnosi: Omit<EvidencaUra, 'id' | 'zaposlen'>[]): Observable<any> {
+    return this.http.post(this.apiUrlEvidencaUr, vnosi);
+  }
+  // =================================
+  getPlacaById(id: number): Observable<Placa> {
+    return this.http.get<Placa>(`${this.apiUrlPlaca}/${id}`);
   }
 }

@@ -1,0 +1,36 @@
+<h1>Nastavitve za Obračun Plač</h1>
+<p>
+  Tukaj lahko urejate globalne parametre, ki vplivajo na vse izračune plač.
+  Vnesite nove vrednosti in jih shranite. Sistem bo pri izračunih vedno upošteval zadnje veljavne nastavitve.
+</p>
+<hr>
+
+<form [formGroup]="nastavitveForm" (ngSubmit)="onSubmit()" class="settings-form">
+  <fieldset>
+    <legend>Splošne Nastavitve</legend>
+
+    <div>
+      <label for="veljavnoOd">Veljavno od datuma:</label>
+      <input id="veljavnoOd" type="date" formControlName="veljavnoOd">
+    </div>
+
+    <div>
+      <label for="minimalnaPlaca">Minimalna plača (€):</label>
+      <input id="minimalnaPlaca" type="number" formControlName="minimalnaPlaca" step="0.01">
+    </div>
+
+    <div>
+      <label for="cenaPrehrane">Znesek za prehrano na dan (€):</label>
+      <input id="cenaPrehrane" type="number" formControlName="cenaPrehrane" step="0.01">
+    </div>
+
+    <div>
+      <label for="cenaPrevozaKm">Kilometrina - cena na km (€):</label>
+      <input id="cenaPrevozaKm" type="number" formControlName="cenaPrevozaKm" step="0.0001">
+    </div>
+
+  </fieldset>
+
+  <button type="submit" [disabled]="!nastavitveForm.valid" class="save-button">Shrani nastavitve</button>
+  
+</form>

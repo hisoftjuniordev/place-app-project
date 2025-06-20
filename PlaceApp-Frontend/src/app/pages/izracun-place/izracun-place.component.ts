@@ -1,6 +1,6 @@
 // Datoteka: src/app/pages/izracun-place/izracun-place.component.ts
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router'; // <<< SPREMEMBA TUKAJ
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ZaposleniService, Placa } from '../../services/zaposleni.service'; // Prilagojen import
 import { PlacaKonfiguracijaService } from '../../services/placa-konfiguracija.service';
@@ -10,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-izracun-place',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './izracun-place.component.html',
   styleUrls: ['./izracun-place.component.css']
 })
@@ -115,9 +115,9 @@ export class IzracunPlaceComponent implements OnInit {
     };
 
     this.zaposleniService.addPlaca(novaPlaca).subscribe({
-      next: () => {
+      next: (shranjenaPlaca) => {
         alert("Plača uspešno shranjena!");
-        this.router.navigate(['/zaposleni']);
+        this.rezultat.id = shranjenaPlaca.id;
       },
       error: (err) => {
         console.error("Napaka pri shranjevanju plače", err);

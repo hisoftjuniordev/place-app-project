@@ -1,0 +1,35 @@
+<h1>Evidenca Dela</h1>
+<h2>Za zaposlenega z ID: {{zaposlenId}} | Mesec: {{ trenutniMesec | date:'MMMM yyyy' }}</h2>
+
+<form [formGroup]="evidencaForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="dnevi">
+    <table>
+      <thead>
+        <tr>
+          <th>Datum</th>
+          <th>Dan</th>
+          <th>Redne ure</th>
+          <th>Nadure</th>
+          <th>Praznik</th>
+          <th>Dopust</th>
+          <th>Bolniška</th>
+          <th>Opomba</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dan of dnevi.controls; let i = index" [formGroupName]="i">
+          <td>{{ dan.value.datum | date:'dd.MM.yyyy' }}</td>
+          <td>{{ dan.value.datum | date:'EEEE' }}</td>
+          <td><input type="number" formControlName="redneUre"></td>
+          <td><input type="number" formControlName="nadure"></td>
+          <td><input type="number" formControlName="praznikUre"></td>
+          <td><input type="number" formControlName="dopustUre"></td>
+          <td><input type="number" formControlName="bolniskaUre"></td>
+          <td><input type="text" formControlName="opomba"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button type="submit" class="save-button" [disabled]="!evidencaForm.valid">Shrani Evidenco</button>
+</form>
