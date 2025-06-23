@@ -1,3 +1,15 @@
-<h1>Program za Plače</h1>
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/" class="navbar-item logo">
+      PlaceApp
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <a routerLink="/zaposleni" routerLinkActive="is-active" class="navbar-item">Zaposleni</a>
+    <a routerLink="/nastavitve" routerLinkActive="is-active" class="navbar-item">Nastavitve</a>
+    </div>
+</nav>
 
-<router-outlet></router-outlet>
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>

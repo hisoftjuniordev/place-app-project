@@ -12,6 +12,7 @@
 .form-column { 
     flex: 1; 
     min-width: 350px; 
+    
 }
 .results-column { 
     flex: 1; 

@@ -1,0 +1,42 @@
+/* Datoteka: src/app/app.component.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 0 2rem;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.navbar-brand .logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+.navbar-menu {
+  display: flex;
+}
+
+.navbar-item {
+  padding: 1.5rem 1rem;
+  text-decoration: none;
+  color: #4a4a4a;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar-item:hover {
+  color: #007bff;
+}
+
+.navbar-item.is-active {
+  color: #007bff;
+  border-bottom: 3px solid #007bff;
+  margin-bottom: -1px; /* Poravnava z ostalimi */
+}
+
+.main-content {
+  padding: 2rem;
+}

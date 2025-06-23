@@ -1,0 +1,135 @@
+/* Datoteka: src/app/pages/placilna-lista/placilna-lista.component.css */
+:host {
+    background-color: #e9ecef;
+}
+
+.page {
+    background: white;
+    width: 210mm;
+    min-height: 297mm;
+    padding: 2cm;
+    margin: 1rem auto;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    color: #333;
+}
+
+.toolbar {
+    text-align: center;
+    padding: 1rem;
+    background: #333;
+}
+
+.toolbar button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.payslip-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #333;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.payslip-header .company-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.payslip-header .payslip-title {
+    text-align: right;
+}
+.payslip-title h2 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.employee-details {
+    margin-bottom: 2rem;
+    border: 1px solid #ccc;
+    padding: 1rem;
+}
+
+.employee-details p {
+    margin: 0.2rem 0;
+}
+
+.payslip-section {
+    margin-bottom: 1.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+thead th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    border-bottom: 2px solid #dee2e6;
+}
+
+td:last-child {
+    text-align: right;
+}
+
+.summary-row td {
+    font-weight: bold;
+    border-top: 1px solid #ccc;
+}
+
+.total-row td {
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: #e9ecef;
+    border-top: 2px solid #333;
+}
+
+.columns {
+    display: flex;
+    gap: 2rem;
+}
+
+.column {
+    flex: 1;
+}
+
+.payslip-footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 2px solid #333;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    .page {
+        margin: 0;
+        border: initial;
+        border-radius: initial;
+        width: initial;
+        min-height: initial;
+        box-shadow: initial;
+        background: initial;
+        page-break-after: always;
+    }
+}

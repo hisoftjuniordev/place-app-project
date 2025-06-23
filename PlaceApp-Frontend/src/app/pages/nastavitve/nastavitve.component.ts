@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ZaposleniService } from '../../services/zaposleni.service';
+import { DohodninskaLestvica, ZaposleniService } from '../../services/zaposleni.service';
 import { NastavitveObracuna } from '../../services/zaposleni.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class NastavitveComponent implements OnInit {
 
   nastavitveForm: FormGroup;
   // V prihodnosti lahko dodate tudi polje za dohodninsko lestvico
-  // dohodninskaLestvica: DohodninskaLestvica[] = [];
+   dohodninskaLestvica: DohodninskaLestvica[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -45,9 +45,9 @@ export class NastavitveComponent implements OnInit {
         this.nastavitveForm.patchValue(data.nastavitve);
       }
       // V prihodnosti lahko tukaj obdelate tudi 'data.lestvica'
-      // if (data && data.lestvica) {
-      //   this.dohodninskaLestvica = data.lestvica;
-      // }
+       if (data && data.lestvica) {
+         this.dohodninskaLestvica = data.lestvica;
+       }
     });
   }
 

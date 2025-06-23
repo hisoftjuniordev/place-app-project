@@ -1,27 +1,98 @@
-<div class="toolbar">
+<div class="toolbar no-print">
     <button (click)="generirajPDF()">Shrani kot PDF</button>
 </div>
 
-<div id="placinaListaContent" *ngIf="placa">
-    <h1>Plačilna Lista</h1>
-    <div class="header-info">
-        <div><strong>Obdobje:</strong> {{ placa.obdobje | date:'MMMM yyyy' }}</div>
-        <div><strong>Zaposleni:</strong> IME IN PRIIMEK (ID: {{placa.zaposlenId}})</div>
-        <div><strong>Podjetje:</strong> NAZIV PODJETJA</div>
+<div class="page" id="placilnaListaContent" *ngIf="placa && izracunPodrobnosti">
+    <header class="payslip-header">
+        <div class="company-name">HISOFT IT D.O.O.</div>
+        <div class="payslip-title">
+            <h2>IZPLAČILNA LISTA ZA {{ placa.obdobje | date:'MMMM yyyy' | uppercase }}</h2>
+            <div>Datum: {{ '' | date:'dd.MM.yy' }}</div>
+        </div>
+    </header>
+
+    <section class="employee-details">
+        <p><strong>Priimek in ime:</strong> IME IN PRIIMEK ZAPOSLENEGA</p>
+        <p><strong>Naslov:</strong> NASLOV ZAPOSLENEGA</p>
+        <p><strong>Davčna številka:</strong> DŠ ZAPOSLENEGA</p>
+        <p><strong>Šifra delavca:</strong> {{ placa.zaposlenId }}</p>
+    </section>
+
+    <section class="payslip-section">
+        <table>
+            <thead><tr><th>Opis Izplačila</th><th>Količina</th><th>Procent</th><th>Znesek (€)</th></tr></thead>
+            <tbody>
+                <tr><td>Redno delo</td><td>{{placa.rednoDeloUre}} ur</td><td></td><td>...</td></tr>
+                <tr><td>Plačani prazniki</td><td>{{placa.placaniPraznikiUre}} ur</td><td></td><td>...</td></tr>
+                <tr><td>Poračun</td><td></td><td></td><td>{{placa.poracun | number:'1.2-2'}}</td></tr>
+                <tr><td>Stimulacija</td><td></td><td></td><td>{{placa.stimulacija | number:'1.2-2'}}</td></tr>
+                <tr><td>Delovna doba</td><td></td><td>{{placa.delovnaDobaProcent}}%</td><td>...</td></tr>
+                <tr class="summary-row">
+                    <td colspan="3">Skupna vrednost BRUTO plače</td>
+                    <td>{{placa.brutoPlaca | number:'1.2-2'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div class="columns">
+        <div class="column">
+            <section class="payslip-section">
+                <table>
+                    <thead><tr><th colspan="2">Prispevki delojemalca (iz bruto)</th></tr></thead>
+                    <tbody>
+                        <tr><td>Prispevek za PIZ (15,50%)</td><td>{{izracunPodrobnosti.prispevekPIZ | number:'1.2-2'}}</td></tr>
+                        <tr><td>Prispevek za zdravstvo (6,36%)</td><td>{{izracunPodrobnosti.prispevekZZ | number:'1.2-2'}}</td></tr>
+                        <tr><td>Prispevek za zaposlovanje (0,14%)</td><td>{{izracunPodrobnosti.prispevekZaposlovanje | number:'1.2-2'}}</td></tr>
+                        <tr><td>Prispevek za porodniško (0,10%)</td><td>{{izracunPodrobnosti.prispevekPorodniska | number:'1.2-2'}}</td></tr>
+                        <tr><td>Obvezni zdravstveni prispevek</td><td>{{izracunPodrobnosti.OZZ_FIKSNI | number:'1.2-2'}}</td></tr>
+                        <tr class="summary-row"><td>Skupaj prispevki</td><td>{{izracunPodrobnosti.skupajPrispevkiIzBruto | number:'1.2-2'}}</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="payslip-section">
+                <table>
+                     <thead><tr><th colspan="2">Osnova za dohodnino in dohodnina</th></tr></thead>
+                     <tbody>
+                        <tr><td>Splošna olajšava</td><td>{{izracunPodrobnosti.splosnaOlajsava | number:'1.2-2'}}</td></tr>
+                        <tr><td>Posebne olajšave</td><td>{{placa.posebneOlajsave | number:'1.2-2'}}</td></tr>
+                        <tr><td>Osnova za dohodnino</td><td>{{izracunPodrobnosti.osnovaZaDohodnino | number:'1.2-2'}}</td></tr>
+                        <tr class="summary-row"><td>Akontacija dohodnine</td><td>{{placa.dohodnina | number:'1.2-2'}}</td></tr>
+                     </tbody>
+                </table>
+            </section>
+        </div>
+
+        <div class="column">
+             <section class="payslip-section">
+                <table>
+                     <thead><tr><th colspan="2">Končni obračun</th></tr></thead>
+                     <tbody>
+                        <tr class="total-row"><td>NETO PLAČA</td><td>{{placa.netoPlaca | number:'1.2-2'}}</td></tr>
+                        <tr><td>Prehrana</td><td>+ {{izracunPodrobnosti.stroskiPrehrana | number:'1.2-2'}}</td></tr>
+                        <tr><td>Prevoz</td><td>+ {{izracunPodrobnosti.stroskiPrevoz | number:'1.2-2'}}</td></tr>
+                        <tr><td>Odtegljaji</td><td>- {{placa.odtegljaji | number:'1.2-2'}}</td></tr>
+                        <tr class="total-row"><td>ZA IZPLAČILO</td><td>{{placa.zaIzplacilo | number:'1.2-2'}}</td></tr>
+                     </tbody>
+                </table>
+             </section>
+              <section class="payslip-section">
+                <table>
+                     <thead><tr><th colspan="2">Strošek delodajalca</th></tr></thead>
+                     <tbody>
+                        <tr><td>Bruto plača</td><td>{{placa.brutoPlaca | number:'1.2-2'}}</td></tr>
+                        <tr><td>Prispevki na bruto (16,10%)</td><td>+ {{izracunPodrobnosti.skupajPrispevkiNaBruto | number:'1.2-2'}}</td></tr>
+                        <tr><td>Materialni stroški</td><td>+ {{izracunPodrobnosti.skupajMaterialniStroski | number:'1.2-2'}}</td></tr>
+                        <tr class="total-row"><td>SKUPNI STROŠEK</td><td>{{placa.celotenStrosekDelodajalca | number:'1.2-2'}}</td></tr>
+                     </tbody>
+                </table>
+             </section>
+        </div>
     </div>
 
-    <table>
-        <tr class="section-title"><td colspan="2">Bruto Sestavine</td></tr>
-        <tr><td>Urna postavka</td><td>{{ placa.urnaPostavka | number:'1.4-4' }} €</td></tr>
-        <tr><td>Redno delo ({{placa.rednoDeloUre}} ur)</td><td>... €</td></tr>
-        <tr class="summary-row"><td>Skupaj BRUTO</td><td>{{ placa.brutoPlaca | number:'1.2-2' }} €</td></tr>
-
-        <tr class="section-title"><td colspan="2">Prispevki in Dohodnina</td></tr>
-        <tr class="summary-row"><td>Dohodnina</td><td>- {{ placa.dohodnina | number:'1.2-2' }} €</td></tr>
-
-        <tr class="total-row"><td>NETO PLAČA</td><td>{{ placa.netoPlaca | number:'1.2-2' }} €</td></tr>
-
-        <tr class="section-title"><td colspan="2">Dodatki in odtegljaji</td></tr>
-        <tr class="total-row"><td>ZA IZPLAČILO</td><td>{{ placa.zaIzplacilo | number:'1.2-2' }} €</td></tr>
-    </table>
+    <footer class="payslip-footer">
+        <div>Podpis delodajalca:</div>
+        <div>Podpis delavca:</div>
+    </footer>
 </div>
