@@ -1,13 +1,92 @@
 /* Datoteka: src/app/pages/zaposleni-list/zaposleni-list.component.css */
-.container { display: flex; gap: 2rem; align-items: flex-start; }
-.column { flex: 1; }
-hr { margin: 1.5rem 0; }
-label { display: block; margin-top: 1rem; font-weight: bold; }
-input, select { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
-button { padding: 10px 15px; margin-top: 1rem; cursor: pointer; width: 100%; }
-button:disabled { cursor: not-allowed; opacity: 0.5; }
-.main-toggle-button { font-weight: bold; background-color: #e7f3ff; border: 1px solid #aed5ff; margin-bottom: 1.5rem; }
-.table-toggle-button { background-color: #f0f0f0; border: 1px solid #ccc; font-size: 0.9em; padding: 8px; }
-table { width:100%; border-collapse: collapse; margin-top: 1rem; }
-th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-.text-danger { font-size: 0.85em; color: #dc3545; margin-top: 4px; }
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  border: none;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button.is-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+.button.is-primary:hover {
+  background-color: var(--primary-hover-color);
+}
+
+.button.is-secondary {
+  background-color: #e9ecef;
+  color: var(--text-color);
+}
+.button.is-secondary:hover {
+  background-color: #d8dde2;
+}
+
+.button.is-small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 2rem;
+  overflow: hidden; /* Za lepše robove tabele */
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+/* Poskrbimo, da tabele nimajo dodatnih robov znotraj kartice */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+thead th {
+  background-color: #f8f9fa;
+  font-weight: 500;
+  color: var(--secondary-color);
+}
+tbody tr:last-child td {
+  border-bottom: none;
+}
